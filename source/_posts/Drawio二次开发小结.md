@@ -60,3 +60,60 @@ tags:
 - 画布
   - `js/diagramly/Editor.js` 包含了所有画布的快捷键逻辑和各种图形变化的事件监听，屎中屎
   - `js/diagramly/EditorUi.js` 包含了所有画布的导出导入的各种额外窗口的图形化定义
+
+
+### 二次开发重要改动点
+
+- `js/bootstrap.js`
+    
+    `line 6`
+    ``` javascript
+    var urlParams = (function()
+    {
+        // 其他代码
+        // 加上如下一行 
+        params = [
+            "dev=1",
+        ]
+        // 其他代码
+    })();
+    ```
+    `line 260+`
+
+    ``` javascript
+    var drawDevUrl = '';
+    var geBasePath = 'js/grapheditor';
+    var mxBasePath = 'mxgraph/src';
+    //加上下面的代码
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        drawDevUrl = `http://${location.host}/`
+        geBasePath = `http://${location.host}/js/grapheditor`;
+        mxBasePath = `http://${location.host}/mxgraph`
+        mxForceIncludes = true
+    }
+    ```
+    
+    `line 再往下看到mxscript的地方`
+    ```javascript
+    // 这个就是给浏览器环境引入脚本，drawio他们还写了个函数防止xss攻击
+    mxscript(drawDevUrl + 'stationmap/xlsx.bundle.js');
+
+    ```
+
+- `js/PreConfig.js`
+
+   `直接在最下面加上`
+   ```javascript
+      urlParams.lang = 'zh'; // 国际化默认中文
+      // 浏览器模式
+      urlParams['browser'] = 1;
+      urlParams['gapi'] = 0;
+      urlParams['db'] = 0;
+      urlParams['od'] = 0;
+      urlParams['tr'] = 0;
+      urlParams['gh'] =0;
+      urlParams['gl'] =0;
+      urlParams['mode'] = 'browser'
+   ```
+
+    
