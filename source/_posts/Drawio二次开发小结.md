@@ -1,7 +1,13 @@
 ---
 title: Drawio二次开发小结
 date: 2025-12-16 11:31:04
-tags:
+categories:
+- 开发
+tags: 
+- 二次开发
+- JavaScript
+   
+
 ---
 ## 需求
 - 入职单位有一个画图软件的需求，B/S 端比较方便，每当更新刷新下网页行
