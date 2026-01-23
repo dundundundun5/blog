@@ -65,44 +65,48 @@ tags:
 ### 二次开发重要改动点
 
 - `js/bootstrap.js`
-    
-    `line 6`
-    ``` javascript
-    var urlParams = (function()
-    {
-        // 其他代码
-        // 加上如下一行 
-        params = [
-            "dev=1",
-        ]
-        // 其他代码
-    })();
-    ```
-    `line 260+`
 
-    ``` javascript
-    var drawDevUrl = '';
-    var geBasePath = 'js/grapheditor';
-    var mxBasePath = 'mxgraph/src';
-    //加上下面的代码
-    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    找到开头代码块
+    
+    ```javascript
+      var urlParams = (function()
+      {
+          //代码
+      })();  
+    ```
+    在如图位置![](bootstrap1.png)加上代码块
+    ```javascript
+      params = [
+        'dev=1',
+        'test=1'
+      ]
+    ```
+
+    注释掉如图代码块![](bootstrap2.png)
+
+    再注释调如图代码块，这个是仓库源码一旦修改，就会提示校验和不一致![](bootstrap3.png)
+   
+    最后在如图位置![](bootstrap4.png)加上代码
+
+    ```javascript
+        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+            drawDevUrl = `http://${location.host}/`
+            geBasePath = `http://${location.host}/js/grapheditor`;
+            mxBasePath = `http://${location.host}/mxgraph`
+            mxForceIncludes = true
+        }
         drawDevUrl = `http://${location.host}/`
         geBasePath = `http://${location.host}/js/grapheditor`;
         mxBasePath = `http://${location.host}/mxgraph`
         mxForceIncludes = true
-    }
-    ```
-    
-    `line 再往下看到mxscript的地方`
-    ```javascript
-    // 这个就是给浏览器环境引入脚本，drawio他们还写了个函数防止xss攻击
-    mxscript(drawDevUrl + 'stationmap/xlsx.bundle.js');
-
     ```
 
+
+    如何加入本地自己定义的js模块？用他的 `mxscript()` ，这样全局都能用，用var声明函数或变量即可，如图所示![](bootstrap5.png)
 - `js/PreConfig.js`
 
-   `直接在最下面加上`
+   在如图位置![](preconfig1.png)加入如下
+
    ```javascript
       urlParams.lang = 'zh'; // 国际化默认中文
       // 浏览器模式
@@ -113,7 +117,69 @@ tags:
       urlParams['tr'] = 0;
       urlParams['gh'] =0;
       urlParams['gl'] =0;
-      urlParams['mode'] = 'browser'
+      urlParams['mode'] = 'browser' 
+   ```
+- `js/diagramly/App.js`
+
+    （可选）注释掉如图，主要是删掉页面右上方的Share按钮![](diagramly-app1.png)
+
+    （可选）修改
+    
+    ```javascript
+      this.appIcon.style.backgroundColor = '#FFFFFF'
+    ```
+  
+    如图，主要是把左上角的logo的背景色从橙色改为白色，然后禁用了logo的事件监听![](diagramly-app2.png)
+- `js/diagramly/Editor.js`
+
+  （可选）在如图位置修改左上角的logo，把图片转成base64字符串就行![](diagramly-editor1.png)
+
+  （可选）在如图位置注释掉代码，这样可以防止默认字体是Helvetica，但是修改字体不在这个文件![](diagramly-editor2.png)
+- `js/diagramly/EditorUi.js`
+
+  （可选）加入一个函数，用于在右边样式栏增加一个处理字符串的文本框（它默认的文本框只能处理数字）
+
+  ```javascript
+  EditorUi.prototype.addInputDun = function(div, label, defaultName)
+  {
+      var lbl = document.createElement('label');
+      mxUtils.write(lbl, label);
+      lbl.setAttribute('for', id);
+      div.appendChild(lbl);
+
+
+      var cb = document.createElement('input');
+      cb.style.marginRight = '8px';
+      cb.style.marginTop = '16px';
+      cb.style.width = '180px';
+      cb.setAttribute('type', 'text');
+      cb.value = defaultName;
+      var id = 'geTextBox-' + Editor.guid();
+      cb.id = id;
+
+
+
+      div.appendChild(cb);
+
+
+      mxUtils.br(div);
+
+      return cb;
+  };
    ```
 
+   (可选) 在如图位置代码替换为
+   ```javascript
+   cell.style += ';sketch=1;' + (cell.style.indexOf('fontFamily=') == -1 || cell.style.indexOf('fontFamily=Times New Roman;') > -1?
+											'fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;' : '');
+   ```
+
+   ，主要是把字体换成Times New Roman![](diagramly-editorui1.png)
+- `js/diagramly/Menus.js`
+
+    会优先调用 `js/grapheditor/Menus.js` 的`init`逻辑，随后再调用本文件的`init`逻辑
+
+    （可选）比如说，我把导出-导出为html的文本和逻辑都改成了导出-导出为excel的逻辑，那么改动就如图所示![](diagramly-menus1.png)
+
+    
     
