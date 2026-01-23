@@ -26,12 +26,14 @@ tags:
   - 所有图形的外形、交互、事件监听 对应仓库 `https://github.com/jgraph/mxgraph`
 - web端自带左上角菜单栏提供基于blob的导入导出，通过浏览器上传或下载文件；桌面端重写了菜单栏变成基于electron主进程的系统Api调用，
 ### 开发环境准备
--  `git clone https://github.com/jgraph/drawio-desktop.git`
-  - 把src/main下面的webapp这个文件夹提取出来，这是浏览器端的所有文件了
+-  `git clone https://github.com/jgraph/drawio` 
+   - 切换到（签出）标签v24.3.1，这个版本也比较新了，所以我用这个版本，因为最终肯定是大多数功能都用不到的，既然是瘦身那就不需要太新的版本
+   - 因为是屎山代码，所以越新的版本防御性编程越强，改动难度越大。
+   - 把src/main下面的webapp这个文件夹提取出来，这是浏览器端的所有文件了
 - nodejs装好，当前目录下
   - 切换淘宝镜像 `npm config set registry https://registry.npmmirror.com`
   - 安装必要的包（serve用于开启服务） `npm install serve`
-  - npm的dev脚本写成
+  - - npm的dev脚本写成
     
     ```json
     "scripts": {
@@ -39,7 +41,7 @@ tags:
     }
     ```
   - 运行 `npm run dev` 或者 `serve -p 11451`
-    - 端口我设置的是 `11451`，因为逸一时，误一世
+    - `11451` 是我设置的端口 ，因为逸一时，误一世
 
 ### 代码结构简析
 - 图形库
@@ -179,7 +181,13 @@ tags:
 
     会优先调用 `js/grapheditor/Menus.js` 的`init`逻辑，随后再调用本文件的`init`逻辑
 
-    （可选）比如说，我把导出-导出为html的文本和逻辑都改成了导出-导出为excel的逻辑，那么改动就如图所示![](diagramly-menus1.png)
+    （可选）比如说，我把导出-导出为html的逻辑改成了导出-导出为excel的逻辑，那么改动就如图所示![](diagramly-menus1.png)
 
+    逻辑变了但是选项文字没变，那么要把导出html改成导出excel![](diagramly-menus2.png)
     
+    ```javascript
+    this.addMenuItems(menu, ['exportExcel', 'exportXml'], parent);
+    ```
+    
+    （可选）最后还可以注释掉一部分 `addMenusItems` 和 `addItem` 改造菜单栏，我这边就把分享到google drive这块去掉了![](diagramly-menus3.png)
     
