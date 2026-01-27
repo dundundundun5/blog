@@ -1,7 +1,7 @@
 ---
 title: Sq1基础
 date: 2023-02-02 15:28:11
-tags:
+categories: 
 - 魔方
 - SQ1
 ---

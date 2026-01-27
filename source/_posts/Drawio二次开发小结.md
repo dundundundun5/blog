@@ -1,10 +1,9 @@
 ---
 title: Drawio二次开发小结
 date: 2025-12-16 11:31:04
-tags: 
+categories: 
 - 开发
 - JavaScript
-- Drawio 
 
 ---
 ## 需求

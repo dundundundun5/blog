@@ -1,10 +1,9 @@
 ---
 title: mxClient
 date: 2025-12-18 16:05:13
-tags: 
+categories: 
 - 开发
 - JavaScript
-- Drawio
 ---
 
 用编译前的代码替换编译后的
