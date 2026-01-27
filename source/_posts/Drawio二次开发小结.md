@@ -14,6 +14,7 @@ tags:
 - 入职单位有一个画图软件的需求，B/S 端比较方便，每当更新刷新下网页行
 - 业务图由至多20种业务相关的多边形、组合图形、线段构成
 - 业务图导出为Excel，Excel的导出结果有模板
+<!-- more -->
 ## 须知
 
 ### 关于Drawio
@@ -22,9 +23,9 @@ tags:
   - 不接受任何陌生人，仅限团队内成员PR
 - 是electron + web三件套的模式，渲染进程内的所有页面和样式都是用纯JavaScript动态构建
   - 所有事件的监听、回调都是手动重写，一点没用到原生的事件系统。每个模块的每个事件都重写了，因此代码非常屎山。
-  - electron + web三件套组成桌面端 对应仓库 `https://github.com/jgraph/drawio-desktop`
-  - web三件套组成web端 对应仓库 `https://github.com/jgraph/drawio` 渲染进程在src/main的webapp
-  - 所有图形的外形、交互、事件监听 对应仓库 `https://github.com/jgraph/mxgraph`
+  - electron + web三件套组成桌面端 对应仓库 [drawio 桌面端](https://github.com/jgraph/drawio-desktop)
+  - web三件套组成web端 对应仓库 [drawio web端](https://github.com/jgraph/drawio) 渲染进程在src/main的webapp
+  - 所有图形的外形、交互、事件监听 对应仓库 [mxgraph绘图库](https://github.com/jgraph/mxgraph)
 - web端自带左上角菜单栏提供基于blob的导入导出，通过浏览器上传或下载文件；桌面端重写了菜单栏变成基于electron主进程的系统Api调用，
 ### 开发环境准备
 -  `git clone https://github.com/jgraph/drawio` 

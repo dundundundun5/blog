@@ -11,7 +11,7 @@ tags:
 ---
 
 用编译前的代码替换编译后的
-
+<!-- more -->
 ```javascript
     /**
      * Copyright (c) 2006-2017, JGraph Holdings Ltd
