@@ -1,11 +1,8 @@
 ---
 title: mxClient
 date: 2025-12-18 16:05:13
-categories:
-- 开发
-
 tags: 
-- 二次开发
+- 开发
 - JavaScript
 - Drawio
 ---
