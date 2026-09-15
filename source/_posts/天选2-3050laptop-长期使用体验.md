@@ -1,5 +1,5 @@
 ---
-title: 天选2 3050laptop 长期使用体验
+title: 天选2 长期使用体验
 date: 2026-07-03 08:31:54
 categories: 
 - 总结
