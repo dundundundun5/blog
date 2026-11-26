@@ -115,3 +115,13 @@ markdown_it_plus:
     typographer:
     quotes: “”‘’
     pre_class: highlight
+
+# 字数统计 / 阅读时长（hexo-word-counter 插件）
+symbols_count_time:
+  symbols: true          # 文章字数
+  time: true             # 阅读时长
+  total_symbols: true    # 站点总字数（页脚）
+  total_time: true       # 站点总阅读时长（页脚）
+  exclude_codeblock: false
+  awl: 4                 # 中文按 4 字符/词折算
+  wpm: 275               # 阅读速度（词/分钟）
